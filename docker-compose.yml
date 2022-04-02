@@ -1,0 +1,41 @@
+version: '3'
+
+services:    
+  api-server:
+    build: ./server
+    image: express
+    container_name: express
+    volumes:
+      - ./server:/app/server
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo 
+    networks:
+      - mern-app
+  react-app:
+    build: ./client
+    image: react
+    container_name: react
+    stdin_open: true
+    volumes:
+      - ./client:/app/client
+    ports:
+      - "3000:3000"
+    networks:
+      - mern-app
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - mern-app
+    volumes:
+      - mongo-data:/data/db
+networks:
+  mern-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
