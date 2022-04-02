@@ -19,8 +19,10 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <div>Home</div>
-      <p>{message}</p>
+      <div className='text-center'>
+        <h1 className='text-3xl font-bold'>Hello world!</h1>
+        <p>{message}</p>
+      </div>
     </>
   );
 };
